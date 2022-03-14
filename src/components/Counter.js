@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { increment, decrement } from "../redux/counterSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const Counter = () => {
-  const [counter, setCounter] = useState(0);
-  const Increment = () => {
-    setCounter(counter + 1);
-  };
-  const Decrement = () => {
-    setCounter(counter - 1);
-  };
+  //taking the count value in the store//
+  const count = useSelector((state) => state.counter.count);
+  console.log(count);
+
+  const dispatch = useDispatch();
+
   return (
     <>
       <div>counter</div>
-      <h4>{counter}</h4>
-      <button onClick={Increment}>+</button>
-      <button onClick={Decrement}>-</button>
+      <h4>{count}</h4>
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
     </>
   );
 };
